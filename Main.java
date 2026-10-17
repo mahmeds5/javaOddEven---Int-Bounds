@@ -6,12 +6,18 @@ public class Main {
 		//Readibliity was not kept in mind, more focus was on using what had been learned. 
 		//Spelling was also not worried about I was doing this fast to test my logic
 		
-		int rangeMin = -20;
-		int rangeMax = 30;
+		int rangeMin = 1;
+		int rangeMax = 3;
 		int counter= rangeMin;
 		
 		int evenCount = 0;
 		int oddCount = 0;
+		
+		int evenSum = 0;
+		int oddSum = 0;
+		
+		int evenProduct = 1;
+		int oddProduct = 1;
 		
 		//Odd arguments cause errors in formating. 
 		//Below 4 lines set up items to check (and thus change formatting rules). 
@@ -57,6 +63,12 @@ public class Main {
 				} else {
 					System.out.print(", ");
 				}
+				evenSum = evenSum + counter;
+				if (counter != 0) {
+					evenProduct = evenProduct * counter;
+				} else {
+					evenProduct = evenProduct; 
+				}
 				counter++;
 				evenCount++;
 			} else {
@@ -86,6 +98,12 @@ public class Main {
 				} else {
 					System.out.print(", ");
 				}
+				oddSum = oddSum + counter;
+				if (counter != 0){
+					oddProduct = oddProduct * counter;
+				} else {
+					oddProduct = oddProduct;
+				}
 				counter++;
 				oddCount++;
 			} else {
@@ -95,14 +113,31 @@ public class Main {
 		}
 		System.out.println("Odd Numbers Counted: " + oddCount);
 		
-		System.out.println();
+		for (int i = 0; i < 2; i++) System.out.println(); //syntax practice 
 		System.out.println("SUMMARY");
 		System.out.println("Min: " + rangeMin);
 		System.out.println("Max: " + rangeMax);
 		System.out.println("Range: " + rangeMin+ " <= x <= " + rangeMax);
 		System.out.println("Total Numbers Counted: " + (evenCount + oddCount));
 		System.out.println("Even Numbers Counted: " + evenCount);
+		System.out.println("Sum of Even Numbers: " + evenSum  + "(Extremly Large ranges may cause sum to go out bounds.)");
+		
+		/*
+		How do we know if something has 0 in the range?
+			1. Min is 0, OR
+			2. Max is 0, OR
+			3. Min < 0 AND Max > 0 
+		*/
+		
+		if (rangeMin ==  0 || rangeMax == 0 || (rangeMin < 0 && rangeMax > 0)){
+			System.out.println("Product of Even Numbers, excluding 0: " + evenProduct + "(Large ranges may cause product to go out bounds.)");
+		} else {
+			System.out.println("Product of Even Numbers: " + evenProduct + "(Medium to Large ranges may cause product to go out bounds.)");
+		}
 		System.out.println("Odd Numbers Counted: " + oddCount);
+		System.out.println("Sum of Odd Numbers: " + oddSum + "   (Extremly Large ranges may cause sum to go out bounds.)");
+		System.out.println("Product of Odd Numbers: " + oddProduct + "   (Medium to Large ranges may cause product to go out bounds.)");
+
 
 			
 		
