@@ -6,9 +6,14 @@ public class Main {
 		//Readibliity was not kept in mind, more focus was on using what had been learned. 
 		//Spelling was also not worried about I was doing this fast to test my logic
 		
-		int rangeMin = 1;
-		int rangeMax = 3;
-		int counter= rangeMin;
+		int rangeMin = 0;
+		int rangeMax = 0;
+		int counter = rangeMin;
+		
+		int oldMin = rangeMin;
+		int oldMax = rangeMax;
+		boolean opposeError = false;
+		
 		
 		int evenCount = 0;
 		int oddCount = 0;
@@ -18,6 +23,10 @@ public class Main {
 		
 		int evenProduct = 1;
 		int oddProduct = 1;
+		
+		boolean allClearMaster = true;
+		boolean allClearEven = true;
+		boolean allClearOdd = true; 
 		
 		//Odd arguments cause errors in formating. 
 		//Below 4 lines set up items to check (and thus change formatting rules). 
@@ -31,27 +40,65 @@ public class Main {
 		if (rangeMax % 2 == 0) maxIsOdd = false; //else cause taken care of, since defaults to Odd. 
 		*/
 		
+		
 		String lineBreak = "----------------------------------------------------";
+		
+		for (int i = 0; i < 2; i++) System.out.println();
+		for (int i = 0; i < 2; i++) System.out.println(lineBreak);
+		//1x Line Break
+		for (int l = 0; l < 1; l++) System.out.println(); //Practicing syntax. This is totally unecessary and hurts readablity.
 		
 		//Edge case if range is 0
 		if (rangeMin == rangeMax){
-			System.out.println("Range has width of 0. No parsable values were found.");
-			return;
+			System.out.println("Min = Max, redirecting Algorithm.");
+			if (rangeMin % 2 == 0){
+				System.out.println(rangeMin + " is even and is the only number in the inclusive range.");
+				evenSum = rangeMax;
+				evenProduct = rangeMax;
+				evenCount++;
+			} else {
+				System.out.println(rangeMin + " is odd  and is the only number in the inclusive range.");
+				oddSum = rangeMax;		
+				oddProduct = rangeMax;
+				oddCount++;
+			}
+			
+			for (int i = 0; i < 2; i++) System.out.println(); //syntax practice 
+			System.out.println("SUMMARY");
+
+			System.out.println("Min & Max: " + rangeMin);
+			System.out.println("Range: " + "x = " + rangeMax);
+			System.out.println("Total Numbers Counted: 1" );
+			System.out.println("Even Numbers Counted: " + evenCount);
+			System.out.println("Sum of Even Numbers: " + evenSum);	
+			System.out.println("Product of Even Numbers: " + rangeMin);
+			System.out.println("Odd Numbers Counted: " + oddCount);
+			System.out.println("Sum of Odd Numbers: " + oddSum);
+			System.out.println("Product of Odd Numbers: " + oddProduct);
+			return; 
 		}
 		
-		for (int i = 0; i < 2; i++) System.out.println();
-				
-				
-		for (int i = 0; i < 2; i++) System.out.println(lineBreak);
+		//Edge case if RangeMin exceeds RangeMax
+		if (rangeMin > rangeMax){
+			System.out.println("Minimum Range is higher than Maximum Range. Computation will lead to inifinite looping.");
+			System.out.println("Swapping Minimum Range and Maximum Range.");
+			rangeMax = oldMin;
+			rangeMin = oldMax;
+			System.out.println("NEW Min: " + rangeMin);
+
+			
+		}
 		
-		//1x Line Break
-		for (int l = 0; l < 1; l++) System.out.println(); //Practicing syntax. This is totally unecessary and hurts readablity.
+		
+
 		
 		System.out.println("Odd and Even Numbers between " + rangeMin + " and " + rangeMax + " (inlcusive)." );
 		
 		//1x Line Break
 		for (int l = 0; l < 1; l++) System.out.println(); //Practicing syntax. This is totally unecessary and hurts readablity. "System.out.println();" works. Obviously.
 		
+		counter = rangeMin;
+
 		//Even Num
 		System.out.println("Even Numbers");
 		while (counter != rangeMax + 1) {
@@ -112,15 +159,28 @@ public class Main {
 			}
 		}
 		System.out.println("Odd Numbers Counted: " + oddCount);
+
+		
 		
 		for (int i = 0; i < 2; i++) System.out.println(); //syntax practice 
 		System.out.println("SUMMARY");
-		System.out.println("Min: " + rangeMin);
-		System.out.println("Max: " + rangeMax);
+		if (opposeError == false){
+			System.out.println("Min: " + rangeMin);
+			System.out.println("Max: " + rangeMax);
+		} else {
+			System.out.println("Original Min: " + oldMin);
+			System.out.println("Original Max: " + oldMax);
+			System.out.println("The Original Min was less than the Original Max, and would thus lead to an infinite loop.");
+			System.out.println("The program auto swapped them.");
+			System.out.println("NEW Min: " + rangeMin);
+			System.out.println("NEW Max: " + rangeMax);
+			
+		}
+
 		System.out.println("Range: " + rangeMin+ " <= x <= " + rangeMax);
 		System.out.println("Total Numbers Counted: " + (evenCount + oddCount));
 		System.out.println("Even Numbers Counted: " + evenCount);
-		System.out.println("Sum of Even Numbers: " + evenSum  + "(Extremly Large ranges may cause sum to go out bounds.)");
+		System.out.println("Sum of Even Numbers: " + evenSum  + "(Extremly Large ranges may cause sum to go out of bounds and/or return false values.)");
 		
 		/*
 		How do we know if something has 0 in the range?
@@ -130,13 +190,13 @@ public class Main {
 		*/
 		
 		if (rangeMin ==  0 || rangeMax == 0 || (rangeMin < 0 && rangeMax > 0)){
-			System.out.println("Product of Even Numbers, excluding 0: " + evenProduct + "(Large ranges may cause product to go out bounds.)");
+			System.out.println("Product of Even Numbers, excluding 0: " + evenProduct + "(Large ranges may cause product to go out of bounds and/or return false values.)");
 		} else {
-			System.out.println("Product of Even Numbers: " + evenProduct + "(Medium to Large ranges may cause product to go out bounds.)");
+			System.out.println("Product of Even Numbers: " + evenProduct + "(Medium to Large ranges may cause product to go out of bounds and/or return false values.)");
 		}
 		System.out.println("Odd Numbers Counted: " + oddCount);
-		System.out.println("Sum of Odd Numbers: " + oddSum + "   (Extremly Large ranges may cause sum to go out bounds.)");
-		System.out.println("Product of Odd Numbers: " + oddProduct + "   (Medium to Large ranges may cause product to go out bounds.)");
+		System.out.println("Sum of Odd Numbers: " + oddSum + "   (Extremly Large ranges may cause sum to go out of bounds and/or return false values.)");
+		System.out.println("Product of Odd Numbers: " + oddProduct + "   (Medium to Large ranges may cause product to go out of bounds and/or return false values.)");
 
 
 			
