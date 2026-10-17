@@ -6,10 +6,32 @@ public class Main {
 		//Readibliity was not kept in mind, more focus was on using what had been learned. 
 		//Spelling was also not worried about I was doing this fast to test my logic
 		
-		int rangeMin = 0;
-		int rangeMax = 20;
+		int rangeMin = -20;
+		int rangeMax = 30;
 		int counter= rangeMin;
+		
+		int evenCount = 0;
+		int oddCount = 0;
+		
+		//Odd arguments cause errors in formating. 
+		//Below 4 lines set up items to check (and thus change formatting rules). 
+		boolean minIsOdd = true; //T is Odd, F is Even
+		boolean maxIsOdd = true; //T is Odd, F is Even
+		
+		/*
+		Ended up not needing this. 
+		
+		if (rangeMin % 2 == 0) minIsOdd = false; //else case taken care of, since defaults to Odd. 
+		if (rangeMax % 2 == 0) maxIsOdd = false; //else cause taken care of, since defaults to Odd. 
+		*/
+		
 		String lineBreak = "----------------------------------------------------";
+		
+		//Edge case if range is 0
+		if (rangeMin == rangeMax){
+			System.out.println("Range has width of 0. No parsable values were found.");
+			return;
+		}
 		
 		for (int i = 0; i < 2; i++) System.out.println();
 				
@@ -29,37 +51,62 @@ public class Main {
 		while (counter != rangeMax + 1) {
 			if (counter % 2 == 0){
 				System.out.print(counter);
-				if (counter == rangeMax){
-					System.out.print(".");
-					for (int l = 0; l < 2; l++) System.out.println(); //Practicing syntax. This is totally unecessary and hurts readablity.  
+				if (counter == rangeMax || counter == rangeMax - 1){  
+					System.out.print(".");	
+					System.out.println();						
 				} else {
 					System.out.print(", ");
 				}
 				counter++;
+				evenCount++;
 			} else {
 				counter++;
 				continue;
 			}
 		}
+		System.out.println("Even Numbers Counted: " + evenCount);
 		
+		// --------------------------------------------------------------------------------------------------------------------
+		
+		for (int l = 0; l < 2; l++) System.out.println(); //Practicing syntax. This is totally unecessary and hurts readablity.  
 		counter = rangeMin; //Reset!
+		
+		// --------------------------------------------------------------------------------------------------------------------
+		
+	
 		
 		//Odd Num
 		System.out.println("Odd Numbers");
 		while (counter != rangeMax + 1) {
 			if (counter % 2 != 0){
 				System.out.print(counter);
-				if (counter == rangeMax - 1){
+				if (counter == rangeMax - 1 || counter == rangeMax ){ 
 					System.out.print(".");
+					System.out.println();						
 				} else {
 					System.out.print(", ");
 				}
 				counter++;
+				oddCount++;
 			} else {
 				counter++;
 				continue;
 			}
 		}
+		System.out.println("Odd Numbers Counted: " + oddCount);
+		
+		System.out.println();
+		System.out.println("SUMMARY");
+		System.out.println("Min: " + rangeMin);
+		System.out.println("Max: " + rangeMax);
+		System.out.println("Range: " + rangeMin+ " <= x <= " + rangeMax);
+		System.out.println("Total Numbers Counted: " + (evenCount + oddCount));
+		System.out.println("Even Numbers Counted: " + evenCount);
+		System.out.println("Odd Numbers Counted: " + oddCount);
+
+			
+		
+		
 		//2x Line Break
 		for (int l = 0; l < 2; l++) System.out.println(); //Practicing syntax. This is totally unecessary and hurts readablity.
 		
